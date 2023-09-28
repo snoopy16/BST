@@ -104,6 +104,24 @@ def min_node_in_BST(root):
     return min_node_in_BST(root.left)
 
 
+def sum_of_nodes_in_BST(root):
+    # Get the sum of left sub-tree + right sub-tree + root node
+    # initialize
+    finalsum = 0
+    leftsum = 0
+    rightsum = 0
+    if root:
+        if root.left is not None:
+            # We have a left sub-tree
+            leftsum = sum_of_nodes_in_BST(root.left)
+        if root.right is not None:
+            # We have a right sub-tree
+            rightsum = sum_of_nodes_in_BST(root.right)
+
+        finalsum = root.val + leftsum + rightsum
+        return finalsum
+
+
 def binary_search_tree():
     # Main method where we will be doing CRUD operations on BST
     # Populate a tree
@@ -143,6 +161,9 @@ def binary_search_tree():
     min_node = min_node_in_BST(node)
     print("Min node value is: ", min_node)
 
+    # Find sum of all nodes
+    nodes_sum = sum_of_nodes_in_BST(node)
+    print("Sum of nodes of BST is: ", nodes_sum)
 
 if __name__ == '__main__':
     binary_search_tree()
