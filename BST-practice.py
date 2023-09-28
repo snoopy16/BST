@@ -1,6 +1,10 @@
 # This is file to perform basic operations on BST
 # Author: Nidhi Tare
-# Operations: Create BST, Insert node, Delete Node, Traverse a Tree (Inorder, PreOrder, PostOrder), Search node
+# Operations: Create BST, Insert node, Delete Node, find max, find min, Traverse a Tree (Inorder, PreOrder, PostOrder), Search node
+# How to Run
+# Pre-requisite: To run make sure you've python3 installed on your machine (On Terminal run $python --version)
+# Command: $python BST-practice.py
+
 
 # Define a basic tree/node
 class Node:
@@ -10,6 +14,7 @@ class Node:
         self.val = key
         self.left = None
         self.right = None
+
 
 def insertNode(node, key):
     # Insert a node in a tree
@@ -42,6 +47,7 @@ def printInorder(root):
         # Print the right sub-tree
         printInorder(root.right)
 
+
 def printPostOrder(root):
     # Prints the BST in PostOrder: LRN
     if root:
@@ -68,7 +74,6 @@ def printPreOrder(root):
         printInorder(root.right)
 
 
-
 def searchNode(root, value):
     # Search a node in a tree with value "value"
     # if found, return the node or None
@@ -81,6 +86,23 @@ def searchNode(root, value):
         return searchNode(root.left, value)
     else:        # the node is in the right sub-tree
         return searchNode(root.right, value)
+
+
+def max_node_in_BST(root):
+    # Look for the right most child in a BST
+    if root.right is None:
+        # We have arrived at the right most node. No right sub-tree is present
+        return root.val
+    return max_node_in_BST(root.right)
+
+
+def min_node_in_BST(root):
+    # Look for the left most child in a BST
+    if root.left is None:
+        # We have arrived at the left most node. No left sub-tree is present
+        return root.val
+    return min_node_in_BST(root.left)
+
 
 def binary_search_tree():
     # Main method where we will be doing CRUD operations on BST
@@ -113,7 +135,14 @@ def binary_search_tree():
     else:
         print(key, "found")
 
-    # Delete a node
+    # Find maximum in a node
+    max_node = max_node_in_BST(node)
+    print("Max node value is: ", max_node)
+
+    # Find minimum in a node
+    min_node = min_node_in_BST(node)
+    print("Min node value is: ", min_node)
+
 
 if __name__ == '__main__':
     binary_search_tree()
