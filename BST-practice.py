@@ -1,7 +1,7 @@
-# This is file to perform basic operations on BST
+# This is script to perform basic operations on BST
 # Author: Nidhi Tare
 # Operations: Create BST, Insert node, Delete Node, find max, find min, Traverse a Tree (Inorder, PreOrder, PostOrder), Search node
-# How to Run
+
 # Pre-requisite: To run make sure you've python3 installed on your machine (On Terminal run $python --version)
 # Command: $python BST-practice.py
 
@@ -167,4 +167,3 @@ def binary_search_tree():
 
 if __name__ == '__main__':
     binary_search_tree()
-
