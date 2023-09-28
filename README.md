@@ -34,6 +34,16 @@ Adding a node to a tree requires traversing the part of the tree where the node 
 
 When searching for a node, you've to determine which side of the tree you should search depending on the value of the root node. If the root node is greater than the node to be searched, look for node in the right sub-tree else look for node in the left sub-tree. 
 
+### Tree Max and Min
+
+Finding tree max and min is pretty straightforward. Usually the first element in the InOrder tree traversal is the smallest number and the last element is the largest number (Inorder tree traversal orders the nodes in increasing order). 
+
+Alternativly, you can split your search into two parts - left and right. For Minimum node, look for the left most child in the BST and return it as the minima. For Maximum node, look for the right most child in the BST and return it as maxima.
+
+### Sum of Nodes
+
+In order to find sum of all the nodes, you'll have to split into two parts - find sum of left sub-tree, then right sub-tree and add the value the node to it. use recursion to traverse the subtrees.
+
 ### Node Deletion
 
 This one is more involved than just tranversing and deleting nodes. In addition to traversing the tree, you also need to re-adjust the tree depending on how many children it has. Generally speaking, there are 3 cases -
