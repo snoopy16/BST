@@ -122,6 +122,66 @@ def sum_of_nodes_in_BST(root):
         return finalsum
 
 
+def findInorderSuccessor(root):
+    while (root.left):
+        root = root.left
+    return root
+
+
+def deleteInorderSuccessor(root):
+    if root is None:
+        return
+    if root.left == None:
+        temp = root.right
+        del root
+        return temp
+
+    root.left = deleteInorderSuccessor(root.left)
+    return root
+
+
+def deleteNode(root, key):
+    # Given the root of the tree, delete the node matching value "key"
+    # Solve for 3 cases
+    # 1. When the element to delete is a leaf
+    # 2. When the element to delete has one child (left child or right child)
+    # 3. When the element to delete has 2 children
+
+    # check for empty tree
+    if root is None:
+        return root  # Sorry! can't delete from an empty tree
+
+    # Recursively traverse the tree and delete the node when found
+    if root.val > key:
+        # the key to delete is in the left-subtree
+        root.left = deleteNode(root.left, key)
+    elif root.val < key:
+        # the key to delete is in the right subtree
+        root.right = deleteNode(root.right, key)
+    else:
+        # We've arrived at the node to be deleted but lets first check its children
+        # case 1: When there is no children. root is a leaf node.
+        if root.left is None and root.right is None:
+            return
+        # case 2: when the element to delete has one child
+        if root.right == None: # has left child only
+            temp = root.left
+            del root
+            return temp
+        elif root.left == None: # has right child only
+            temp = root.right
+            del root
+            return temp
+        else:
+            # case 3: when the element to delete has 2 children
+            # step1: replace the node to delete with its InOrder successor
+            # step 2: Delete the inorder successor
+            temp = findInorderSuccessor(root.right)
+            root.val = temp.val
+            root.right = deleteInorderSuccessor(root.right)
+
+    
+    return root
 def binary_search_tree():
     # Main method where we will be doing CRUD operations on BST
     # Populate a tree
@@ -164,6 +224,14 @@ def binary_search_tree():
     # Find sum of all nodes
     nodes_sum = sum_of_nodes_in_BST(node)
     print("Sum of nodes of BST is: ", nodes_sum)
+
+    # Delete node
+    key_to_delete = 11
+    print("\n Delete key from tree: ", key_to_delete)
+    deleteNode(node, key_to_delete)
+    # Print out BST after node deletion
+    printInorder(node)
+
 
 if __name__ == '__main__':
     binary_search_tree()
